@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_devtools.h"
 #include "regex_tool/regex_tool.h"
+#include "json_tool/json_tool.h"
 
 class DevTools : public QMainWindow
 {
@@ -12,9 +13,11 @@ public:
     DevTools(QWidget *parent = Q_NULLPTR);
 
     void on_btn_regex_clicked();
+    void on_btn_json_clicked();
 
 private:
     Ui::DevToolsClass ui;
 
     RegexTool regex_tool;
+    JsonTool json_tool;
 };
