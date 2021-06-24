@@ -8,6 +8,7 @@
 RegexTool::RegexTool(QWidget *parent): QWidget(parent)
 {
     ui.setupUi(this);
+    ui.line_regex->setFocus();
 
     connect(ui.btn_match, &QPushButton::clicked, this, &RegexTool::match);
     connect(ui.te_input, &QTextEdit::textChanged, this, &RegexTool::match);
