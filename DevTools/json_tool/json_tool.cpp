@@ -12,6 +12,7 @@ using json = nlohmann::json;
 JsonTool::JsonTool(QWidget *parent): QWidget(parent)
 {
     ui.setupUi(this);
+    ui.te_src->setFocus();
 
     connect(ui.btn_format, &QPushButton::clicked, this, &JsonTool::format);
     connect(ui.btn_rmformat, &QPushButton::clicked, this, &JsonTool::rmformat);
@@ -76,6 +77,7 @@ void JsonTool::find_next()
         QPalette palette = ui.te_dst->palette();
         palette.setColor(QPalette::Highlight, palette.color(QPalette::Active, QPalette::Highlight));
         ui.te_dst->setPalette(palette);
+        ui.te_dst->setFocus();
     }
     else
     {
@@ -92,6 +94,7 @@ void JsonTool::find_prev()
         QPalette palette = ui.te_dst->palette();
         palette.setColor(QPalette::Highlight, palette.color(QPalette::Active, QPalette::Highlight));
         ui.te_dst->setPalette(palette);
+        ui.te_dst->setFocus();
     }
     else
     {
