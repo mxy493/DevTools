@@ -85,11 +85,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="base64_tool\base64_tool.cpp" />
     <ClCompile Include="json_tool\json_tool.cpp" />
     <ClCompile Include="regex_tool\regex_tool.cpp" />
+    <QtRcc Include="base64_tool\base64_tool.qrc" />
     <QtRcc Include="devtools.qrc" />
     <QtRcc Include="json_tool\json_tool.qrc" />
     <QtRcc Include="regex_tool\regex_tool.qrc" />
+    <QtUic Include="base64_tool\base64_tool.ui" />
     <QtUic Include="devtools.ui" />
     <QtMoc Include="devtools.h" />
     <ClCompile Include="devtools.cpp" />
@@ -102,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="json_tool\json_tool.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="base64_tool\base64_tool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

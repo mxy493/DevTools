@@ -41,6 +41,9 @@
     <QtRcc Include="json_tool\json_tool.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+    <QtRcc Include="base64_tool\base64_tool.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -52,6 +55,9 @@
     <ClCompile Include="json_tool\json_tool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="base64_tool\base64_tool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="regex_tool\regex_tool.ui">
@@ -60,12 +66,18 @@
     <QtUic Include="json_tool\json_tool.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="base64_tool\base64_tool.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="regex_tool\regex_tool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="json_tool\json_tool.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="base64_tool\base64_tool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Base64ToolClass</class>
+ <widget class="QWidget" name="Base64ToolClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1200</width>
+    <height>800</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Base64Tool</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="0">
+      <widget class="QPushButton" name="btn_encode">
+       <property name="text">
+        <string>编码</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QPushButton" name="btn_save">
+       <property name="text">
+        <string>保存</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="4">
+      <widget class="QPlainTextEdit" name="edit_up">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(250, 250, 250);</string>
+       </property>
+       <property name="placeholderText">
+        <string>在此处粘贴或输入……</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0" colspan="4">
+      <widget class="QPlainTextEdit" name="edit_down">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(250, 250, 250);</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>此处显示转换结果……</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="btn_decode">
+       <property name="text">
+        <string>解码</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="4">
+      <widget class="QPushButton" name="btn_file_select">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(250, 250, 250);
+border:1px solid black;
+}
+QPushButton:pressed{
+background-color: rgb(245, 245, 245);
+}</string>
+       </property>
+       <property name="text">
+        <string>点击此处选择文件</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../../../../../../Icons/PNG/替换.png</normaloff>../../../../../../../Icons/PNG/替换.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QPushButton" name="btn_copy">
+       <property name="text">
+        <string>复制</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="base64_tool.qrc"/>
+ </resources>
+ <connections/>
+</ui>

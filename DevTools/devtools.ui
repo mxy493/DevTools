@@ -24,7 +24,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
+      <item row="0" column="3">
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -54,6 +54,13 @@
        <widget class="QPushButton" name="btn_json">
         <property name="text">
          <string>JSON工具</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="btn_base64">
+        <property name="text">
+         <string>Base64</string>
         </property>
        </widget>
       </item>
