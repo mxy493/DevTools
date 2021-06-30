@@ -386,12 +386,47 @@
           </row>
           <row>
            <property name="text">
+            <string>?</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>*</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>+</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>\s</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>\S</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
             <string>3</string>
            </property>
           </row>
           <row>
            <property name="text">
-            <string>4</string>
+            <string>\D</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>\w</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>\W</string>
            </property>
           </row>
           <row>
@@ -416,21 +451,6 @@
           </row>
           <row>
            <property name="text">
-            <string>9</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>10</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>11</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
             <string>12</string>
            </property>
           </row>
@@ -442,6 +462,11 @@
           <row>
            <property name="text">
             <string>14</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>15</string>
            </property>
           </row>
           <column>
@@ -461,7 +486,7 @@
           </item>
           <item row="0" column="1">
            <property name="text">
-            <string>除换行符以外的所有字符</string>
+            <string>除换行符以外的任意单个字符</string>
            </property>
           </item>
           <item row="1" column="0">
@@ -471,7 +496,7 @@
           </item>
           <item row="1" column="1">
            <property name="text">
-            <string>字符串开头</string>
+            <string>文本开头</string>
            </property>
           </item>
           <item row="2" column="0">
@@ -481,127 +506,177 @@
           </item>
           <item row="2" column="1">
            <property name="text">
-            <string>字符串结尾</string>
+            <string>文本结尾</string>
            </property>
           </item>
           <item row="3" column="0">
            <property name="text">
-            <string>\d, \w, \s</string>
+            <string>?</string>
            </property>
           </item>
           <item row="3" column="1">
            <property name="text">
-            <string>匹配数字、字符、空格</string>
+            <string>匹配 0 次或 1 次</string>
            </property>
           </item>
           <item row="4" column="0">
            <property name="text">
-            <string>\D, \W, \S</string>
+            <string>*</string>
            </property>
           </item>
           <item row="4" column="1">
            <property name="text">
-            <string>匹配非数字、非字符、非空格</string>
+            <string>匹配 0 次或多次</string>
            </property>
           </item>
           <item row="5" column="0">
            <property name="text">
-            <string>[abc]</string>
+            <string>+</string>
            </property>
           </item>
           <item row="5" column="1">
            <property name="text">
-            <string>匹配 a、b 或 c 中的一个字母</string>
+            <string>匹配 1 次或多次</string>
            </property>
           </item>
           <item row="6" column="0">
            <property name="text">
-            <string>[a-z]</string>
+            <string>\s</string>
            </property>
           </item>
           <item row="6" column="1">
            <property name="text">
-            <string>匹配 a 到 z 中的一个字母</string>
+            <string>任意空白字符</string>
            </property>
           </item>
           <item row="7" column="0">
            <property name="text">
-            <string>aa|bb</string>
+            <string>\S</string>
            </property>
           </item>
           <item row="7" column="1">
            <property name="text">
-            <string>匹配 aa 或 bb</string>
+            <string>非空白字符</string>
            </property>
           </item>
           <item row="8" column="0">
            <property name="text">
-            <string>?</string>
+            <string>\d</string>
            </property>
           </item>
           <item row="8" column="1">
            <property name="text">
-            <string>匹配0次或1次</string>
+            <string>阿拉伯数字字符</string>
            </property>
           </item>
           <item row="9" column="0">
            <property name="text">
-            <string>+</string>
+            <string>\D</string>
            </property>
           </item>
           <item row="9" column="1">
            <property name="text">
-            <string>匹配1次或多次</string>
+            <string>非阿拉伯数字字符</string>
            </property>
           </item>
           <item row="10" column="0">
            <property name="text">
-            <string>*</string>
+            <string>\w</string>
            </property>
           </item>
           <item row="10" column="1">
            <property name="text">
-            <string>匹配0次或多次</string>
+            <string>字母、数字或下划线字符</string>
            </property>
           </item>
           <item row="11" column="0">
            <property name="text">
-            <string>{n}</string>
+            <string>\W</string>
            </property>
           </item>
           <item row="11" column="1">
            <property name="text">
-            <string>匹配n次</string>
+            <string>非字母、数字或下划线字符</string>
            </property>
           </item>
           <item row="12" column="0">
            <property name="text">
-            <string>{n,}</string>
+            <string>[abc]</string>
            </property>
           </item>
           <item row="12" column="1">
            <property name="text">
-            <string>匹配至少n次</string>
+            <string>单个 a 或 b 或 c 字符</string>
            </property>
           </item>
           <item row="13" column="0">
            <property name="text">
-            <string>{,n}</string>
+            <string>[^abc]</string>
            </property>
           </item>
           <item row="13" column="1">
            <property name="text">
-            <string>匹配最多n次</string>
+            <string>非 a 或 b 或 c 字符</string>
            </property>
           </item>
           <item row="14" column="0">
            <property name="text">
-            <string>{n,m}</string>
+            <string>[a-z]</string>
            </property>
           </item>
           <item row="14" column="1">
            <property name="text">
-            <string>匹配至少n次但不超过m次</string>
+            <string>匹配 a 到 z 中的一个字母</string>
+           </property>
+          </item>
+          <item row="15" column="0">
+           <property name="text">
+            <string>a|b</string>
+           </property>
+          </item>
+          <item row="15" column="1">
+           <property name="text">
+            <string>匹配 a 或 b</string>
+           </property>
+          </item>
+          <item row="16" column="0">
+           <property name="text">
+            <string>{n}</string>
+           </property>
+          </item>
+          <item row="16" column="1">
+           <property name="text">
+            <string>匹配 n 次</string>
+           </property>
+          </item>
+          <item row="17" column="0">
+           <property name="text">
+            <string>{n,}</string>
+           </property>
+          </item>
+          <item row="17" column="1">
+           <property name="text">
+            <string>匹配至少 n 次</string>
+           </property>
+          </item>
+          <item row="18" column="0">
+           <property name="text">
+            <string>{,n}</string>
+           </property>
+          </item>
+          <item row="18" column="1">
+           <property name="text">
+            <string>匹配最多 n 次</string>
+           </property>
+          </item>
+          <item row="19" column="0">
+           <property name="text">
+            <string>{n,m}</string>
+           </property>
+          </item>
+          <item row="19" column="1">
+           <property name="text">
+            <string>匹配至少 n 次但不超过 m 次</string>
            </property>
           </item>
          </widget>
