@@ -89,6 +89,7 @@
     <ClCompile Include="json_tool\json_tool.cpp" />
     <ClCompile Include="net_tool\net_tool.cpp" />
     <ClCompile Include="regex_tool\regex_tool.cpp" />
+    <ClCompile Include="utils.cpp" />
     <QtRcc Include="base64_tool\base64_tool.qrc" />
     <QtRcc Include="devtools.qrc" />
     <QtRcc Include="json_tool\json_tool.qrc" />
@@ -114,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="net_tool\net_tool.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -7,6 +7,9 @@
 #include <QLineEdit>
 
 #include "net_tool.h"
+#include "../utils.h"
+
+extern QJsonObject config;
 
 NetTool::NetTool(QWidget *parent): QWidget(parent)
 {
@@ -24,16 +27,20 @@ NetTool::NetTool(QWidget *parent): QWidget(parent)
     connect(ui.btn_clear, &QPushButton::clicked, this, &NetTool::clear);
 
     QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
+    QString _default = "WLAN";
+    if (config.contains("NetTool") && config["NetTool"].toObject().contains("network_interface"))
+    {
+        _default = config["NetTool"].toObject().value("network_interface").toString();
+    }
     for (int i = 0; i < interfaces.size(); ++i)
     {
         QString name = interfaces[i].humanReadableName();
         ui.combo_interfaces->addItem(name, interfaces[i].index());
-        if (name == "WLAN")
+        if (name == _default)
         {
             ui.combo_interfaces->setCurrentIndex(i);
         }
     }
-    update_interface_info(-1);
 
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
     connect(manager, &QNetworkAccessManager::finished, this, &NetTool::replyFinished);
@@ -46,6 +53,14 @@ void NetTool::update_interface_info(int index)
     QNetworkInterface interface = QNetworkInterface::interfaceFromIndex(index);
     QString mac = interface.hardwareAddress();
     ui.label_mac->setText(mac);
+
+    QJsonObject obj
+    {
+        { "NetTool", QJsonObject({
+            {"network_interface", interface.humanReadableName()}})
+        }
+    };
+    save_config(obj);
 }
 
 void NetTool::replyFinished(QNetworkReply *reply)

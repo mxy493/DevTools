@@ -1,6 +1,7 @@
 ﻿#include <QPushButton>
 
 #include "devtools.h"
+#include "utils.h"
 
 DevTools::DevTools(QWidget *parent): QMainWindow(parent)
 {
