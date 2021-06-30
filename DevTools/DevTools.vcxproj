@@ -32,12 +32,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.15.2_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;network;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.15.2_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;network;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -87,10 +87,12 @@
   <ItemGroup>
     <ClCompile Include="base64_tool\base64_tool.cpp" />
     <ClCompile Include="json_tool\json_tool.cpp" />
+    <ClCompile Include="net_tool\net_tool.cpp" />
     <ClCompile Include="regex_tool\regex_tool.cpp" />
     <QtRcc Include="base64_tool\base64_tool.qrc" />
     <QtRcc Include="devtools.qrc" />
     <QtRcc Include="json_tool\json_tool.qrc" />
+    <QtRcc Include="net_tool\net_tool.qrc" />
     <QtRcc Include="regex_tool\regex_tool.qrc" />
     <QtUic Include="base64_tool\base64_tool.ui" />
     <QtUic Include="devtools.ui" />
@@ -98,6 +100,7 @@
     <ClCompile Include="devtools.cpp" />
     <ClCompile Include="main.cpp" />
     <QtUic Include="json_tool\json_tool.ui" />
+    <QtUic Include="net_tool\net_tool.ui" />
     <QtUic Include="regex_tool\regex_tool.ui" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="base64_tool\base64_tool.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="net_tool\net_tool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

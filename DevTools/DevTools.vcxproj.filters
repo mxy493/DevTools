@@ -44,6 +44,9 @@
     <QtRcc Include="base64_tool\base64_tool.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+    <QtRcc Include="net_tool\net_tool.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,6 +61,9 @@
     <ClCompile Include="base64_tool\base64_tool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="net_tool\net_tool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="regex_tool\regex_tool.ui">
@@ -69,6 +75,9 @@
     <QtUic Include="base64_tool\base64_tool.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="net_tool\net_tool.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="regex_tool\regex_tool.h">
@@ -78,6 +87,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="base64_tool\base64_tool.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="net_tool\net_tool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
