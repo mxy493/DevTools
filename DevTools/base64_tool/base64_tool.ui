@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Base64Tool</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../devtools.qrc">
+    <normaloff>:/images/DevTools.svg</normaloff>:/images/DevTools.svg</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
@@ -115,7 +119,7 @@ background-color: rgb(245, 245, 245);
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="base64_tool.qrc"/>
+  <include location="../devtools.qrc"/>
  </resources>
  <connections/>
 </ui>

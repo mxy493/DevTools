@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>JsonTool</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../devtools.qrc">
+    <normaloff>:/images/DevTools.svg</normaloff>:/images/DevTools.svg</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
@@ -124,7 +128,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="json_tool.qrc"/>
+  <include location="../devtools.qrc"/>
  </resources>
  <connections/>
 </ui>

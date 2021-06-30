@@ -35,18 +35,6 @@
     <ClCompile Include="devtools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <QtRcc Include="regex_tool\regex_tool.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-    <QtRcc Include="json_tool\json_tool.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-    <QtRcc Include="base64_tool\base64_tool.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-    <QtRcc Include="net_tool\net_tool.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -100,5 +88,10 @@
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="devtools.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

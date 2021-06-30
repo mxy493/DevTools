@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>DevTools</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="devtools.qrc">
+    <normaloff>:/images/DevTools.svg</normaloff>:/images/DevTools.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0" rowspan="2" colspan="2">

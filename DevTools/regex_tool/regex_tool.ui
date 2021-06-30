@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>RegexTool</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../devtools.qrc">
+    <normaloff>:/images/DevTools.svg</normaloff>:/images/DevTools.svg</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout_4">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout" columnstretch="1,1">
@@ -690,7 +694,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="regex_tool.qrc"/>
+  <include location="../devtools.qrc"/>
  </resources>
  <connections/>
 </ui>

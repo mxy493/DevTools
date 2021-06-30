@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="DevTools">
+    <qresource prefix="/">
+        <file>images/DevTools.svg</file>
     </qresource>
 </RCC>
