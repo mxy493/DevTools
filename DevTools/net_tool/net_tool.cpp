@@ -19,6 +19,10 @@ NetTool::NetTool(QWidget *parent): QWidget(parent)
     connect(ui.combo_interfaces,
         static_cast<void (QComboBox:: *)(int)>(&QComboBox::currentIndexChanged),
         this, &NetTool::update_interface_info);
+    connect(&manager, &QNetworkAccessManager::finished, this, &NetTool::update_ip);
+    connect(ui.btn_update_ip, &QPushButton::clicked, [&]() {
+        manager.get(QNetworkRequest(QUrl("http://ifconfig.co/json")));
+        });
     connect(ui.btn_ping, &QPushButton::clicked, this, &NetTool::ping);
     connect(ui.line_ping, &QLineEdit::returnPressed, this, &NetTool::ping);
     connect(&qprocess, &QProcess::readyReadStandardOutput, [&]() {
@@ -43,9 +47,7 @@ NetTool::NetTool(QWidget *parent): QWidget(parent)
         }
     }
 
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    connect(manager, &QNetworkAccessManager::finished, this, &NetTool::update_ip);
-    manager->get(QNetworkRequest(QUrl("http://api.ipaddress.com/myip?format=json")));
+    manager.get(QNetworkRequest(QUrl("http://ifconfig.co/json")));
 }
 
 void NetTool::update_interface_info(int index)
@@ -70,44 +72,11 @@ void NetTool::update_ip(QNetworkReply *reply)
     if (doc.isObject())
     {
         QJsonObject obj = doc.object();
-        ui.label_public_ip->setText(obj.value("ipaddress").toString());
-        ui.label_proxy_ip->setText(obj.value("proxy").toString());
+        ui.label_ip->setText(obj.value("ip").toString());
+        QString location = obj.value("country").toString() + ", " + obj.value("city").toString();
+        ui.label_location->setText(location);
     }
     reply->deleteLater();
-    update_geoip();
-}
-
-void NetTool::update_geoip()
-{
-    QString ip = ui.label_public_ip->text();
-    QString cmd = "./bin/maxmind/mmdbinspect.exe -db ./data/GeoLite2-Country.mmdb " + ip;
-    QProcess process_geoip;
-    process_geoip.start(cmd);
-    process_geoip.waitForFinished();
-    QString output = QString::fromUtf8(process_geoip.readAllStandardOutput());
-
-    QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
-    if (doc.isArray())
-    {
-        QJsonArray array = doc.array();
-        if (!array.isEmpty() && array.first().isObject())
-        {
-            // "Records": []
-            QJsonObject obj = array.first().toObject();
-            if (obj.contains("Records") && obj.value("Records").isArray())
-            {
-                array = obj.value("Records").toArray();
-                if (!array.isEmpty() && array.first().isObject())
-                {
-                    // "Record": {}
-                    obj = array.first().toObject();
-                    QString location = obj.value("Record").toObject().value("country").toObject()
-                        .value("names").toObject().value("zh-CN").toString();
-                    ui.label_location->setText(location);
-                }
-            }
-        }
-    }
 }
 
 void NetTool::ping()

@@ -12,7 +12,6 @@ class NetTool : public QWidget
 
 public:
     NetTool(QWidget *parent = Q_NULLPTR);
-    void update_geoip();
 
 public slots:
     void update_interface_info(int index);
@@ -23,4 +22,5 @@ public slots:
 private:
     Ui::NetToolClass ui;
     QProcess qprocess;
+    QNetworkAccessManager manager;
 };
