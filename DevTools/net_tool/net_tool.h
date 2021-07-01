@@ -12,10 +12,11 @@ class NetTool : public QWidget
 
 public:
     NetTool(QWidget *parent = Q_NULLPTR);
+    void update_geoip();
 
 public slots:
     void update_interface_info(int index);
-    void replyFinished(QNetworkReply *reply);
+    void update_ip(QNetworkReply *reply);
     void ping();
     void clear();
 

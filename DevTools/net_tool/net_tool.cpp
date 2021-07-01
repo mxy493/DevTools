@@ -3,6 +3,7 @@
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <QPushButton>
 #include <QLineEdit>
 
@@ -43,7 +44,7 @@ NetTool::NetTool(QWidget *parent): QWidget(parent)
     }
 
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    connect(manager, &QNetworkAccessManager::finished, this, &NetTool::replyFinished);
+    connect(manager, &QNetworkAccessManager::finished, this, &NetTool::update_ip);
     manager->get(QNetworkRequest(QUrl("http://api.ipaddress.com/myip?format=json")));
 }
 
@@ -63,7 +64,7 @@ void NetTool::update_interface_info(int index)
     save_config(obj);
 }
 
-void NetTool::replyFinished(QNetworkReply *reply)
+void NetTool::update_ip(QNetworkReply *reply)
 {
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
     if (doc.isObject())
@@ -73,6 +74,40 @@ void NetTool::replyFinished(QNetworkReply *reply)
         ui.label_proxy_ip->setText(obj.value("proxy").toString());
     }
     reply->deleteLater();
+    update_geoip();
+}
+
+void NetTool::update_geoip()
+{
+    QString ip = ui.label_public_ip->text();
+    QString cmd = "./bin/maxmind/mmdbinspect.exe -db ./data/GeoLite2-Country.mmdb " + ip;
+    QProcess process_geoip;
+    process_geoip.start(cmd);
+    process_geoip.waitForFinished();
+    QString output = QString::fromUtf8(process_geoip.readAllStandardOutput());
+
+    QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
+    if (doc.isArray())
+    {
+        QJsonArray array = doc.array();
+        if (!array.isEmpty() && array.first().isObject())
+        {
+            // "Records": []
+            QJsonObject obj = array.first().toObject();
+            if (obj.contains("Records") && obj.value("Records").isArray())
+            {
+                array = obj.value("Records").toArray();
+                if (!array.isEmpty() && array.first().isObject())
+                {
+                    // "Record": {}
+                    obj = array.first().toObject();
+                    QString location = obj.value("Record").toObject().value("country").toObject()
+                        .value("names").toObject().value("zh-CN").toString();
+                    ui.label_location->setText(location);
+                }
+            }
+        }
+    }
 }
 
 void NetTool::ping()
