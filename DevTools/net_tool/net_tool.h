@@ -15,7 +15,8 @@ public:
 
 public slots:
     void update_interface_info(int index);
-    void update_ip(QNetworkReply *reply);
+    void query_ip_info();
+    void update_ip_info(QNetworkReply *reply);
     void ping();
     void clear();
 

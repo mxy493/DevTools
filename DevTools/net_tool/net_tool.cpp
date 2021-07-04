@@ -6,6 +6,8 @@
 #include <QJsonArray>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QTimer>
+#include <QRegularExpression>
 
 #include "net_tool.h"
 #include "../utils.h"
@@ -16,13 +18,13 @@ NetTool::NetTool(QWidget *parent): QWidget(parent)
 {
     ui.setupUi(this);
 
+    ui.line_ip->setFocus();
+
     connect(ui.combo_interfaces,
         static_cast<void (QComboBox:: *)(int)>(&QComboBox::currentIndexChanged),
         this, &NetTool::update_interface_info);
-    connect(&manager, &QNetworkAccessManager::finished, this, &NetTool::update_ip);
-    connect(ui.btn_update_ip, &QPushButton::clicked, [&]() {
-        manager.get(QNetworkRequest(QUrl("http://ifconfig.co/json")));
-        });
+    connect(ui.btn_query_ip_info, &QPushButton::clicked, this, &NetTool::query_ip_info);
+    connect(&manager, &QNetworkAccessManager::finished, this, &NetTool::update_ip_info);
     connect(ui.btn_ping, &QPushButton::clicked, this, &NetTool::ping);
     connect(ui.line_ping, &QLineEdit::returnPressed, this, &NetTool::ping);
     connect(&qprocess, &QProcess::readyReadStandardOutput, [&]() {
@@ -47,7 +49,7 @@ NetTool::NetTool(QWidget *parent): QWidget(parent)
         }
     }
 
-    manager.get(QNetworkRequest(QUrl("http://ifconfig.co/json")));
+    query_ip_info();
 }
 
 void NetTool::update_interface_info(int index)
@@ -66,17 +68,58 @@ void NetTool::update_interface_info(int index)
     save_config(obj);
 }
 
-void NetTool::update_ip(QNetworkReply *reply)
+void NetTool::query_ip_info()
+{
+    ui.label_info->setText(u8"查询中！");
+    QString url("http://ifconfig.co/json");
+    QString ip = ui.line_ip->text();
+    if (!ip.isEmpty())
+    {
+        // 判断是否为合法的IPv4地址
+        QRegularExpression re("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+            "\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+            "\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+            "\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/");
+        if (re.match(ip).hasMatch())
+        {
+            url += "?ip=" + ip;
+        }
+        else
+        {
+            ui.label_info->setText(u8"不是合法的IPv4地址，无法查询！");
+            QTimer::singleShot(3000, [&]() { ui.label_info->setText(u8""); });
+            return;
+        }
+    }
+    manager.get(QNetworkRequest(QUrl(url)));
+}
+
+void NetTool::update_ip_info(QNetworkReply *reply)
 {
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
     if (doc.isObject())
     {
         QJsonObject obj = doc.object();
-        ui.label_ip->setText(obj.value("ip").toString());
-        QString location = obj.value("country").toString() + ", " + obj.value("city").toString();
-        ui.label_location->setText(location);
+        if (ui.line_ip->text().isEmpty())
+        {
+            ui.line_ip->setText(obj.value("ip").toString());
+        }
+        ui.label_decimal->setText(QString::number(obj.value("ip_decimal").toVariant().toLongLong()));
+        ui.label_country->setText(obj.value("country").toString());
+        ui.label_country_iso->setText(obj.value("country_iso").toString());
+        ui.label_region->setText(obj.value("region_name").toString());
+        ui.label_region_code->setText(obj.value("region_code").toString());
+        ui.label_city->setText(obj.value("city").toString());
+        ui.label_latitude->setText(QString::number(obj.value("latitude").toDouble()));
+        ui.label_longitude->setText(QString::number(obj.value("longitude").toDouble()));
+        ui.label_timezone->setText(obj.value("time_zone").toString());
+        ui.label_asn->setText(obj.value("asn").toString());
+        ui.label_asn_org->setText(obj.value("asn_org").toString());
     }
     reply->deleteLater();
+
+    ui.label_info->setText(u8"已更新！");
+    QTimer::singleShot(1000, [&]() { ui.label_info->setText(u8""); });
 }
 
 void NetTool::ping()
