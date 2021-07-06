@@ -8,6 +8,7 @@
 #include <QLineEdit>
 #include <QTimer>
 #include <QRegularExpression>
+#include <QThread>
 
 #include "net_tool.h"
 #include "../utils.h"
@@ -25,6 +26,7 @@ NetTool::NetTool(QWidget *parent): QWidget(parent)
         this, &NetTool::update_interface_info);
     connect(ui.btn_query_ip_info, &QPushButton::clicked, this, &NetTool::query_ip_info);
     connect(&manager, &QNetworkAccessManager::finished, this, &NetTool::update_ip_info);
+    connect(&timer, &QTimer::timeout, [&]() { ui.label_info->setText(""); });
     connect(ui.btn_ping, &QPushButton::clicked, this, &NetTool::ping);
     connect(ui.line_ping, &QLineEdit::returnPressed, this, &NetTool::ping);
     connect(&qprocess, &QProcess::readyReadStandardOutput, [&]() {
@@ -87,7 +89,7 @@ void NetTool::query_ip_info()
         else
         {
             ui.label_info->setText(u8"不是合法的IPv4地址，无法查询！");
-            QTimer::singleShot(3000, [&]() { ui.label_info->setText(u8""); });
+            timer.start(3000);
             return;
         }
     }
@@ -119,7 +121,7 @@ void NetTool::update_ip_info(QNetworkReply *reply)
     reply->deleteLater();
 
     ui.label_info->setText(u8"已更新！");
-    QTimer::singleShot(1000, [&]() { ui.label_info->setText(u8""); });
+    timer.start(1000);
 }
 
 void NetTool::ping()
@@ -135,4 +137,13 @@ void NetTool::clear()
     ui.line_ping->clear();
     ui.text_edit->clear();
     ui.line_ping->setFocus();
+}
+
+void NetTool::closeEvent(QCloseEvent *event)
+{
+    while (timer.remainingTime() > 0)
+    {
+        QThread::msleep(timer.remainingTime());
+    }
+    event->accept();
 }

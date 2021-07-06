@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QNetworkReply>
 #include <QProcess>
+#include <QTimer>
 
 #include "ui_net_tool.h"
 
@@ -19,9 +20,11 @@ public slots:
     void update_ip_info(QNetworkReply *reply);
     void ping();
     void clear();
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::NetToolClass ui;
+    QTimer timer;
     QProcess qprocess;
     QNetworkAccessManager manager;
 };
