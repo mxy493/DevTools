@@ -4,8 +4,8 @@
 #include <QStandardPaths>
 #include <QDateTime>
 #include <QTextStream>
-#include <nlohmann/json.hpp>
-using json = nlohmann::json;
+#include <QJsonDocument>
+#include <QRegularExpression>
 
 #include "json_tool.h"
 
@@ -24,18 +24,65 @@ JsonTool::JsonTool(QWidget *parent): QWidget(parent)
 void JsonTool::format()
 {
     QString src = ui.te_src->toPlainText();
+    src.remove(QRegularExpression("\\s"));
 
-    json json_obj = json::parse(src.toUtf8().data(), nullptr, false);
-    if (json_obj.is_discarded())
+    QJsonDocument doc = QJsonDocument::fromJson(src.toUtf8());
+    if (!doc.isObject())
     {
         QMessageBox msg(QMessageBox::Warning, u8"注意", u8"输入的数据不是有效的JSON字符串！");
         msg.exec();
     }
     else
     {
+        ui.te_dst->clear();
         int indentation = ui.spin_indentation->value();
-        std::string str = json_obj.dump(indentation);
-        ui.te_dst->setPlainText(QString::fromUtf8(str.c_str()));
+        if (indentation == -1)
+        {
+            ui.te_dst->setPlainText(src);
+        }
+        else
+        {
+            QVector<QChar> vec;
+            bool escape = false;
+            for (auto ch : src)
+            {
+                ui.te_dst->moveCursor(QTextCursor::End);
+                if (escape)
+                {
+                    escape = false;
+                    ui.te_dst->insertPlainText(ch);
+                }
+                else if (ch == '\\')
+                {
+                    escape = true;
+                    ui.te_dst->insertPlainText(ch);
+                }
+                else if (ch == '{' || ch == '[')
+                {
+                    vec.push_back(ch);
+                    ui.te_dst->insertPlainText(QString(vec.size() * indentation, ' ')
+                        .prepend("\n").prepend(ch));
+                }
+                else if (ch == ':')
+                {
+                    ui.te_dst->insertPlainText(": ");
+                }
+                else if (ch == ',')
+                {
+                    ui.te_dst->insertPlainText(QString(vec.size() * indentation, ' ').prepend(",\n"));
+                }
+                else if (ch == '}' || ch == ']')
+                {
+                    vec.pop_back();
+                    ui.te_dst->insertPlainText(QString(vec.size() * indentation, ' ')
+                        .prepend("\n").append(ch));
+                }
+                else
+                {
+                    ui.te_dst->insertPlainText(ch);
+                }
+            }
+        }
     }
 }
 
