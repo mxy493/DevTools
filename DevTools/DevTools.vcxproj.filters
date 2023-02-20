@@ -55,6 +55,9 @@
     <ClCompile Include="utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="digit_tool\digit_tool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="regex_tool\regex_tool.ui">
@@ -69,6 +72,9 @@
     <QtUic Include="net_tool\net_tool.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="digit_tool\digit_tool.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="regex_tool\regex_tool.h">
@@ -81,6 +87,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="net_tool\net_tool.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="digit_tool\digit_tool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

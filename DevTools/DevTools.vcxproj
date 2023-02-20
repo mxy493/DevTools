@@ -13,18 +13,18 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0E80EE64-964C-4014-99DF-9FC0455B3A51}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base64_tool\base64_tool.cpp" />
+    <ClCompile Include="digit_tool\digit_tool.cpp" />
     <ClCompile Include="json_tool\json_tool.cpp" />
     <ClCompile Include="net_tool\net_tool.cpp" />
     <ClCompile Include="regex_tool\regex_tool.cpp" />
@@ -96,6 +97,7 @@
     <QtMoc Include="devtools.h" />
     <ClCompile Include="devtools.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="digit_tool\digit_tool.ui" />
     <QtUic Include="json_tool\json_tool.ui" />
     <QtUic Include="net_tool\net_tool.ui" />
     <QtUic Include="regex_tool\regex_tool.ui" />
@@ -113,6 +115,7 @@
     <QtMoc Include="net_tool\net_tool.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="digit_tool\digit_tool.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>

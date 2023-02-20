@@ -6,6 +6,7 @@
 #include "json_tool/json_tool.h"
 #include "base64_tool/base64_tool.h"
 #include "net_tool/net_tool.h"
+#include "digit_tool/digit_tool.h"
 
 
 DevTools::DevTools(QWidget *parent): QMainWindow(parent)
@@ -15,6 +16,7 @@ DevTools::DevTools(QWidget *parent): QMainWindow(parent)
     connect(ui.btn_json, &QPushButton::clicked, this, &DevTools::on_btn_json_clicked);
     connect(ui.btn_base64, &QPushButton::clicked, this, &DevTools::on_btn_base64_clicked);
     connect(ui.btn_net, &QPushButton::clicked, this, &DevTools::on_btn_net_clicked);
+    connect(ui.btn_digit, &QPushButton::clicked, this, &DevTools::on_btn_digit_clicked);
 }
 
 void DevTools::on_btn_regex_clicked()
@@ -43,4 +45,11 @@ void DevTools::on_btn_net_clicked()
     NetTool *net_tool = new NetTool();
     net_tool->setAttribute(Qt::WA_DeleteOnClose);
     net_tool->show();
+}
+
+void DevTools::on_btn_digit_clicked()
+{
+    DigitTool *digit_tool = new DigitTool();
+    digit_tool->setAttribute(Qt::WA_DeleteOnClose);
+    digit_tool->show();
 }

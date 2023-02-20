@@ -15,6 +15,7 @@ public:
     void on_btn_json_clicked();
     void on_btn_base64_clicked();
     void on_btn_net_clicked();
+    void on_btn_digit_clicked();
 
 private:
     Ui::DevToolsClass ui;
