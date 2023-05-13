@@ -7,6 +7,8 @@ DigitTool::DigitTool(QWidget *parent) : QWidget(parent)
     ui.setupUi(this);
     ui.lineEdit_10->setFocus();
 
+    setAttribute(Qt::WA_DeleteOnClose);
+
     QValidator *validator = new QRegularExpressionValidator(QRegularExpression("^1[01]*$"), this);
     ui.lineEdit_2->setValidator(validator);
     validator = new QRegularExpressionValidator(QRegularExpression("^[1-7][0-7]*$"), this);

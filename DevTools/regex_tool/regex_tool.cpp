@@ -10,6 +10,8 @@ RegexTool::RegexTool(QWidget *parent): QWidget(parent)
     ui.setupUi(this);
     ui.line_regex->setFocus();
 
+    setAttribute(Qt::WA_DeleteOnClose);
+
     connect(ui.btn_match, &QPushButton::clicked, this, &RegexTool::match);
     connect(ui.te_input, &QTextEdit::textChanged, this, &RegexTool::match);
     connect(ui.line_regex, &QLineEdit::textChanged, this, &RegexTool::match);

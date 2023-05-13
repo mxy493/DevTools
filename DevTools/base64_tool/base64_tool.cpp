@@ -13,6 +13,8 @@ Base64Tool::Base64Tool(QWidget *parent): QWidget(parent)
     ui.setupUi(this);
     ui.edit_up->setFocus();
 
+    setAttribute(Qt::WA_DeleteOnClose);
+
     connect(ui.btn_file_select, &QPushButton::clicked, this, &Base64Tool::open_file);
     connect(ui.btn_encode, &QPushButton::clicked, this, &Base64Tool::encode);
     connect(ui.btn_decode, &QPushButton::clicked, this, &Base64Tool::decode);

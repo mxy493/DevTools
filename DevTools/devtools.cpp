@@ -22,34 +22,39 @@ DevTools::DevTools(QWidget *parent): QMainWindow(parent)
 void DevTools::on_btn_regex_clicked()
 {
     RegexTool *regex_tool = new RegexTool();
-    regex_tool->setAttribute(Qt::WA_DeleteOnClose);
-    regex_tool->show();
+    regex_tool->showNormal();
+
+    this->showMinimized();
 }
 
 void DevTools::on_btn_json_clicked()
 {
     JsonTool *json_tool = new JsonTool();
-    json_tool->setAttribute(Qt::WA_DeleteOnClose);
-    json_tool->show();
+    json_tool->showNormal();
+
+    this->showMinimized();
 }
 
 void DevTools::on_btn_base64_clicked()
 {
     Base64Tool *base64_tool = new Base64Tool();
-    base64_tool->setAttribute(Qt::WA_DeleteOnClose);
-    base64_tool->show();
+    base64_tool->showNormal();
+
+    this->showMinimized();
 }
 
 void DevTools::on_btn_net_clicked()
 {
     NetTool *net_tool = new NetTool();
-    net_tool->setAttribute(Qt::WA_DeleteOnClose);
-    net_tool->show();
+    net_tool->showNormal();
+
+    this->showMinimized();
 }
 
 void DevTools::on_btn_digit_clicked()
 {
     DigitTool *digit_tool = new DigitTool();
-    digit_tool->setAttribute(Qt::WA_DeleteOnClose);
-    digit_tool->show();
+    digit_tool->showNormal();
+
+    this->showMinimized();
 }

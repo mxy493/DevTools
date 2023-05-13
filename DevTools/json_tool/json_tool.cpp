@@ -14,6 +14,8 @@ JsonTool::JsonTool(QWidget *parent): QWidget(parent)
     ui.setupUi(this);
     ui.te_src->setFocus();
 
+    setAttribute(Qt::WA_DeleteOnClose);
+
     connect(ui.btn_format, &QPushButton::clicked, this, &JsonTool::format);
     connect(ui.btn_rmformat, &QPushButton::clicked, this, &JsonTool::rmformat);
     connect(ui.btn_save, &QPushButton::clicked, this, &JsonTool::save);

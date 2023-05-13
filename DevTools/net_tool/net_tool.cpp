@@ -20,6 +20,7 @@ NetTool::NetTool(QWidget *parent): QWidget(parent)
     ui.setupUi(this);
 
     ui.line_ip->setFocus();
+    setAttribute(Qt::WA_DeleteOnClose);
 
     connect(ui.combo_interfaces,
         static_cast<void (QComboBox:: *)(int)>(&QComboBox::currentIndexChanged),
